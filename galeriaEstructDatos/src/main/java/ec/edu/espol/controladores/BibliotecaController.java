@@ -49,6 +49,8 @@ public class BibliotecaController implements Initializable {
     @FXML
     private void crearAlbum(ActionEvent event) {
         
+        //commit de PRUEBA
+        
         String rutaAbsoluta = Paths.get("portada").toString();
         String nombreAlbum = "album 1";
         File crea_carpeta = new File(nombreAlbum);
