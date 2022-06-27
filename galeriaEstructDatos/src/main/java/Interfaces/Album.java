@@ -25,5 +25,39 @@ public abstract class Album {
         this.descripcion = descripcion;
         this.portada = portada;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public Image getPortada() {
+        return portada;
+    }
+
+    public void setPortada(Image portada) {
+        this.portada = portada;
+    }
+
+    public LinkedList<Fotografia> getFotos() {
+        return fotos;
+    }
+
+    public void setFotos(LinkedList<Fotografia> fotos) {
+        this.fotos = fotos;
+    }
+    
+    
   
 }

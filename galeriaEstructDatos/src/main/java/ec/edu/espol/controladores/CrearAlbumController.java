@@ -14,6 +14,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -43,11 +44,11 @@ public class CrearAlbumController implements Initializable {
     
     
     // atributos Agregados manualmente
-    private String rutaPortada;
+    private Path rutaPortada;
     
-    private final String rutaAbsoluta = "C:\\Users\\USER\\Documents\\NetBeansProjects\\galeriaEstructuras\\galeriaEstructDatos\\Albumes\\";
+    public final String rutaAbsoluta = "C:\\Users\\USER\\Documents\\NetBeansProjects\\galeriaEstructuras\\galeriaEstructDatos\\Albumes\\";
 
-    private FileChooser fc= new FileChooser();
+    public FileChooser fc= new FileChooser();
 
     /**
      * Initializes the controller class.
@@ -64,11 +65,13 @@ public class CrearAlbumController implements Initializable {
         String etDescripcion = etdescripcion.getText();
         Image ivPortada = ivportada.getImage();
         
-        if(etNombre.isEmpty() && etDescripcion.isEmpty() && ivPortada != null){
+        if(!etNombre.isEmpty() && !etDescripcion.isEmpty() && ivPortada != null){
             
             Fotografia foto = new Fotografia(ivPortada);
+            
             Album nuevoAlbum = new AlbumPublico(etNombre, etDescripcion, ivPortada);      
-            String nombreAlbum = etNombre;           
+            String nombreAlbum = nuevoAlbum.getNombre();
+            
             File creaAlbum = new File(rutaAbsoluta + nombreAlbum);
 
             if(creaAlbum.exists())
@@ -77,20 +80,18 @@ public class CrearAlbumController implements Initializable {
             else{
                 
                 creaAlbum.mkdir();
-
-                String rutaDentroAlbum = creaAlbum.getAbsolutePath() + "\\";
-                Path fuente = Paths.get(rutaDentroAlbum);
-                Path destino = Paths.get(rutaPortada);
                 
-                try {
-                    Files.copy(fuente, destino);
+                String stringrutaAlbumCreado = creaAlbum.toPath().toString() + "foto.png";
+                Path rutaAlbumCreado = Paths.get(stringrutaAlbumCreado);
+                System.out.println("RUTA DE LA carpeta DESTINo");
+                System.out.println(rutaAlbumCreado);
+                
+                try {                    
+                    Files.copy(rutaPortada, rutaAlbumCreado, REPLACE_EXISTING);
                     System.out.println("Se copio el archivo");
                 } catch (IOException ex) {
-                    System.out.println("CAYO");
-                    ex.printStackTrace();
-                }
-                
-                
+                    System.out.println(ex);
+                }   
             }
         }
     }
@@ -101,7 +102,9 @@ public class CrearAlbumController implements Initializable {
         File seledFile= fc.showOpenDialog(null);
         if (seledFile!= null){
             Image img = new Image(seledFile.toURI().toString());
-            rutaPortada = seledFile.toURI().toString();
+            rutaPortada = seledFile.toPath();
+            System.out.println("RUTA DE LA FOTO ORIGINAL");
+            System.out.println(rutaPortada);
             ivportada.setImage(img);
         }
     }
