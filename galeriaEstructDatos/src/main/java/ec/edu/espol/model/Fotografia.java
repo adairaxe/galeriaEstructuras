@@ -10,14 +10,11 @@ import javafx.scene.image.Image;
 public class Fotografia {
     
     private String descripcion, lugar, nombre;
-    private Image foto, icono;
+    private Image foto;
     
 
-    public Fotografia(String descripcion, String lugar, String nombre) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.lugar = lugar;
-        
+    public Fotografia(Image foto) {
+     
     }
 
     public String getDescripcion() {
@@ -52,17 +49,9 @@ public class Fotografia {
         this.foto = foto;
     }
 
-    public Image getIcono() {
-        return icono;
-    }
-
-    public void setIcono(Image icono) {
-        this.icono = icono;
-    }
-
     @Override
     public String toString() {
-        return "Fotografia{" + "descripcion=" + descripcion + ", lugar=" + lugar + ", nombre=" + nombre + ", foto=" + foto + ", icono=" + icono + '}';
+        return "Fotografia{" + "descripcion=" + descripcion + ", lugar=" + lugar + ", nombre=" + nombre + ", foto=" + foto + ", icono=" + '}';
     }
     
     

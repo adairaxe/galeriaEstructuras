@@ -7,15 +7,19 @@ package ec.edu.espol.controladores;
 
 import TDAs.LinkedList;
 import Interfaces.Album;
+import ec.edu.espol.galeriaestructdatos.App;
 import ec.edu.espol.model.Fotografia;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -47,18 +51,11 @@ public class BibliotecaController implements Initializable {
     }    
 
     @FXML
-    private void crearAlbum(ActionEvent event) {
+    private void crearAlbum(ActionEvent event) throws IOException {      
+        FXMLLoader loader = App.loadFXML("crearAlbum");
+        Parent root= loader.load();
+        App.scene.setRoot(root);
         
-        //commit de PRUEBA
-        
-        String rutaAbsoluta = Paths.get("portada").toString();
-        String nombreAlbum = "album 1";
-        File crea_carpeta = new File(nombreAlbum);
-        
-        if(crea_carpeta.exists())
-            System.out.println("El nombre está ocupad");
-        else
-            crea_carpeta.mkdir();
     }
     
     

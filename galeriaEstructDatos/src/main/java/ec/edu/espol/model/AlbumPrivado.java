@@ -6,7 +6,6 @@
 package ec.edu.espol.model;
 
 import Interfaces.Album;
-import TDAs.ArrayList;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -14,19 +13,14 @@ import javafx.scene.image.ImageView;
  *
  * @author USER
  */
-public class AlbumPublico extends Album{
+public class AlbumPrivado extends Album{
+    private String clave;
 
-    public AlbumPublico(String nombre, String descripcion, Image portada) {
+    public AlbumPrivado(String nombre, String descripcion, Image portada, String clave) {
         super(nombre, descripcion, portada);
+        this.clave = clave;
     }
-
-
     
-    
-
-
-    
-
     
     
     

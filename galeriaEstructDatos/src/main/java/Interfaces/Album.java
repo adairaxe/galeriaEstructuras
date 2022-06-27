@@ -5,49 +5,25 @@
  */
 package Interfaces;
 
-import TDAs.ArrayList;
+import TDAs.LinkedList;
 import ec.edu.espol.model.Fotografia;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+/**
+ *
+ * @author USER
+ */
 public abstract class Album {
-    
-    private String nombre;   
-    private Image portada;
-    private String ruta;
-    private ArrayList<Fotografia> fotos;
+    String nombre;
+    String descripcion;
+    Image portada;
+    LinkedList<Fotografia> fotos;
 
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
+    public Album(String nombre, String descripcion, Image portada) {
         this.nombre = nombre;
-    }
-
-    public Image getPortada() {
-        return portada;
-    }
-
-    public void setPortada(Image portada) {
+        this.descripcion = descripcion;
         this.portada = portada;
     }
-
-    public ArrayList<Fotografia> getFotos() {
-        return fotos;
-    }
-
-    public void setFotos(ArrayList<Fotografia> fotos) {
-        this.fotos = fotos;
-    }
-    
-    
-    public void sacarFotografia(){
-        
-    }
-    
-    
-    public void agregarFotografia(){
-        
-    }
-    
+  
 }
