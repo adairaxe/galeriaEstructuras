@@ -73,6 +73,7 @@ public class CrearAlbumController implements Initializable {
             String nombreAlbum = nuevoAlbum.getNombre();
             
             File creaAlbum = new File(rutaAbsoluta + nombreAlbum);
+            
 
             if(creaAlbum.exists())
                 
@@ -81,13 +82,18 @@ public class CrearAlbumController implements Initializable {
                 
                 creaAlbum.mkdir();
                 
-                String stringrutaAlbumCreado = creaAlbum.toPath().toString() + "foto.png";
-                Path rutaAlbumCreado = Paths.get(stringrutaAlbumCreado);
-                System.out.println("RUTA DE LA carpeta DESTINo");
-                System.out.println(rutaAlbumCreado);
+                String rutaDestino = rutaAbsoluta + "/" + nombreAlbum +" /" + "fot.png";
+                Path d = Paths.get(rutaDestino);
+                
+//                Path rutaAlbumCreado_prueba = Paths.get(creaAlbum.getPath().toString() + ".png");
+//                System.out.println("ruta Pueba");
+//                String stringrutaAlbumCreado = creaAlbum.toPath().toString()+".png";
+//                Path rutaAlbumCreado = Paths.get(stringrutaAlbumCreado);
+//                System.out.println("RUTA DE LA carpeta DESTINo");
+//                System.out.println(rutaAlbumCreado);
                 
                 try {                    
-                    Files.copy(rutaPortada, rutaAlbumCreado, REPLACE_EXISTING);
+                    Files.copy(rutaPortada, d, REPLACE_EXISTING);
                     System.out.println("Se copio el archivo");
                 } catch (IOException ex) {
                     System.out.println(ex);
@@ -96,6 +102,7 @@ public class CrearAlbumController implements Initializable {
         }
     }
 
+    
     @FXML
     private void cargarPortada(MouseEvent event) {
         fc.setInitialDirectory(new File(System.getProperty("user.home")));
