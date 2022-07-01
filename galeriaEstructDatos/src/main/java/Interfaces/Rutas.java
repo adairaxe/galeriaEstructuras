@@ -9,8 +9,7 @@ package Interfaces;
  *
  * @author USER
  */
-public interface Rutas {
+public abstract class Rutas {
     
-    public String darRutaAbsoluta();
     
 }

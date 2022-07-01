@@ -4,6 +4,8 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
@@ -56,10 +58,19 @@
       </Text>
    </top>
    <right>
-      <ImageView fx:id="ivportada" accessibleText="Cargar protada" fitHeight="250.0" fitWidth="200.0" onMouseClicked="#cargarPortada" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+      <ImageView fx:id="ivportada" accessibleHelp="Cargar protada" accessibleRoleDescription="Cargar protada" accessibleText="Cargar protada" fitHeight="250.0" fitWidth="200.0" focusTraversable="true" onMouseClicked="#cargarPortada" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="10.0" right="20.0" top="10.0" />
          </BorderPane.margin>
+         <effect>
+            <Glow />
+         </effect>
+         <image>
+            <Image url="@../../../../../../../Albumes/marcoPortDef.jpg" />
+         </image>
       </ImageView>
    </right>
+   <effect>
+      <Glow />
+   </effect>
 </BorderPane>

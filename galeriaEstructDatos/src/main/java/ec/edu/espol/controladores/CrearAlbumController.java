@@ -6,6 +6,8 @@
 package ec.edu.espol.controladores;
 
 import Interfaces.Album;
+import Interfaces.Rutas;
+import Interfaces.cargarFotos;
 import ec.edu.espol.model.AlbumPublico;
 import ec.edu.espol.model.Fotografia;
 import java.io.File;
@@ -31,7 +33,7 @@ import javafx.stage.FileChooser;
  *
  * @author USER
  */
-public class CrearAlbumController implements Initializable {
+public class CrearAlbumController extends Rutas implements Initializable {
 
     @FXML
     private TextField etnombre;
@@ -46,8 +48,8 @@ public class CrearAlbumController implements Initializable {
     // atributos Agregados manualmente
     private Path rutaPortada;
     
-    public final String rutaAbsoluta = "C:\\Users\\USER\\Documents\\NetBeansProjects\\galeriaEstructuras\\galeriaEstructDatos\\Albumes\\";
-
+    public final String rutaAbsolutaAlbunmes = "C:\\Users\\USER\\Documents\\NetBeansProjects\\galeriaEstructuras\\galeriaEstructDatos\\Albumes\\";
+    
     public FileChooser fc= new FileChooser();
 
     /**
@@ -57,7 +59,9 @@ public class CrearAlbumController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
-
+    
+    
+    
     @FXML
     private void guardarAlbum(ActionEvent event) {
         
@@ -65,48 +69,28 @@ public class CrearAlbumController implements Initializable {
         String etDescripcion = etdescripcion.getText();
         Image ivPortada = ivportada.getImage();
         
-        if(!etNombre.isEmpty() && !etDescripcion.isEmpty() && ivPortada != null){
-            
-            Fotografia foto = new Fotografia(ivPortada);
-            
-            Album nuevoAlbum = new AlbumPublico(etNombre, etDescripcion, ivPortada);      
-            String nombreAlbum = nuevoAlbum.getNombre();
-            
-            File creaAlbum = new File(rutaAbsoluta + nombreAlbum);
-            
+        if(!etNombre.isEmpty() && !etDescripcion.isEmpty() && ivPortada != null){            
+            Album nuevoAlbum = new AlbumPublico(etNombre, etDescripcion, ivPortada);             
+            File creaAlbum = new File(rutaAbsolutaAlbunmes + nuevoAlbum.getNombre());
 
-            if(creaAlbum.exists())
-                
+            if(creaAlbum.exists())               
                 System.out.println("El nombre está ocupado");
-            else{
-                
+            
+            else{  
                 creaAlbum.mkdir();
-                
-                String rutaDestino = rutaAbsoluta + "/" + nombreAlbum +" /" + "fot.png";
-                Path d = Paths.get(rutaDestino);
-                
-//                Path rutaAlbumCreado_prueba = Paths.get(creaAlbum.getPath().toString() + ".png");
-//                System.out.println("ruta Pueba");
-//                String stringrutaAlbumCreado = creaAlbum.toPath().toString()+".png";
-//                Path rutaAlbumCreado = Paths.get(stringrutaAlbumCreado);
-//                System.out.println("RUTA DE LA carpeta DESTINo");
-//                System.out.println(rutaAlbumCreado);
-                
-                try {                    
-                    Files.copy(rutaPortada, d, REPLACE_EXISTING);
-                    System.out.println("Se copio el archivo");
-                } catch (IOException ex) {
-                    System.out.println(ex);
-                }   
+                cargarFotos.agregarPortadaAlbum(creaAlbum, rutaPortada);       
             }
         }
     }
 
     
+    
     @FXML
     private void cargarPortada(MouseEvent event) {
+        
         fc.setInitialDirectory(new File(System.getProperty("user.home")));
         File seledFile= fc.showOpenDialog(null);
+        
         if (seledFile!= null){
             Image img = new Image(seledFile.toURI().toString());
             rutaPortada = seledFile.toPath();
