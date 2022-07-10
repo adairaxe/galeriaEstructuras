@@ -45,8 +45,8 @@ public class BibliotecaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        LinkedList<Album> albumes = new LinkedList<>();
+        crearLinkedAlbum();
+        //LinkedList<Album> albumes = new LinkedList<>();
 
     }    
 
