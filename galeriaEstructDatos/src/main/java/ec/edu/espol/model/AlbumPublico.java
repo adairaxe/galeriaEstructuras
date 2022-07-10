@@ -19,6 +19,10 @@ public class AlbumPublico extends Album{
     public AlbumPublico(String nombre, String descripcion, Image portada) {
         super(nombre, descripcion, portada);
     }
+    
+    public AlbumPublico(String nombre, String descripcion) {
+        super(nombre, descripcion);
+    }
 
 
     

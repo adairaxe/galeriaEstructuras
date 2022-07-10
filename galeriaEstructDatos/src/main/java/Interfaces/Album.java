@@ -25,6 +25,11 @@ public abstract class Album {
         this.descripcion = descripcion;
         this.portada = portada;
     }
+    
+    public Album(String nombre, String descripcion) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+    }
 
     public String getNombre() {
         return nombre;
