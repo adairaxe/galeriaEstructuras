@@ -79,6 +79,70 @@ public class BibliotecaController implements Initializable {
         }
         return album;
     }
+    @FXML
+    //al borrar un album debemos removeer del linker, borrar carpeta y borrar registro del archivo
+    private Album elimininarAlbum (int i){
+    //eliminamos del tda
+    Album album = albumes.remove(i);
+    //eliminamos la carpeta
+    File f = new File(rutaAbsolutaAlbunmes + album.getNombre());	
+    if (f.delete())
+        System.out.println("Se eliminó la carpeta " + album.getNombre() );
+    else
+        System.out.println("Hubo un problema contacte al desarrollador");
     
+    removeLineFromFile (rutaAbsolutaAlbunmes  + "Albumes.txt",album.getNombre()+","+album.getDescripcion());
+    return album;
+    }
+    //código tomado de http://pacholalala.blogspot.com/2009/09/eliminar-una-linea-de-un-archivo-de.html 
+    //para borrar una linea de un archivo créditos a su autor
+    public void removeLineFromFile(String file, String lineToRemove) {
+
+        try {
+
+        File inFile = new File(file);
+   
+        if (!inFile.isFile()) {
+            System.out.println("El parámetro no existe en el archivo");
+        return;
+        }
+   
+         //Construct the new file that will later be renamed to the original filename. 
+        File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
+        BufferedReader br = new BufferedReader(new FileReader(file));
+        PrintWriter pw = new PrintWriter(new FileWriter(tempFile));
+        String line = null;
+
+        //Read from the original file and write to the new 
+        //unless content matches data to be removed.
+        while ((line = br.readLine()) != null) {
+   
+            if (!line.trim().equals(lineToRemove)) {
+                pw.println(line);
+                pw.flush();
+            }
+        }
+         pw.close();
+         br.close();
+   
+         //Delete the original file
+         if (!inFile.delete()) {
+            System.out.println("Could not delete file");
+         return;
+         } 
+   
+  //Rename the new file to the filename the original file had.
+        if (!tempFile.renameTo(inFile))
+            System.out.println("Could not rename file");
+   
+        }
+        catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        catch (IOException ex) {
+            System.out.println("Algun problema existió");
+        }
+  
+    }
     
 }
