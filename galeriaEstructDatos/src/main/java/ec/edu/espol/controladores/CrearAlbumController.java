@@ -77,6 +77,7 @@ public class CrearAlbumController extends Rutas implements Initializable {
                 System.out.println("El nombre está ocupado");
             
             else{  
+                guardarRegistro(etNombre, etDescripcion);
                 creaAlbum.mkdir();
                 cargarFotos.agregarPortadaAlbum(creaAlbum, rutaPortada);       
             }
@@ -97,6 +98,26 @@ public class CrearAlbumController extends Rutas implements Initializable {
             System.out.println("RUTA DE LA FOTO ORIGINAL");
             System.out.println(rutaPortada);
             ivportada.setImage(img);
+        }
+    }
+        //aquí guardaremos los datos que cargaremos en un linkedlist Album para cargarlos en la interfaz
+        private void guardarRegistro(String nombre, String descripcion) {
+        try {
+            
+           File file= new File(rutaAbsolutaAlbunmes  + "Albumes.txt");
+           //String path =rutaAbsolutaAlbunmes  + "Albumes.txt";
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            //bw.newLine();
+            bw.write(nombre+","+descripcion);
+            bw.newLine();
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     
