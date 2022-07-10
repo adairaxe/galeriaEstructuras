@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -26,12 +27,12 @@ import javafx.stage.Window;
  */
 public class VistaFotosGeneralController implements Initializable {
 
-    @FXML
-    private ScrollPane spfotopequena;
-    @FXML
     private ImageView ivfotoGrande;
-    @FXML
     private Button btCargar;
+    @FXML
+    private ScrollPane panealbum;
+    @FXML
+    private HBox hbalbumes;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
@@ -55,6 +56,8 @@ public class VistaFotosGeneralController implements Initializable {
             Image image = new Image("file:" + imgFile.getAbsolutePath());
             ivfotoGrande.setImage(image);
         }
+        
+        
     });
     }    
     

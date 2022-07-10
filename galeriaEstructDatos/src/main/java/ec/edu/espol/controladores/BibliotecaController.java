@@ -30,10 +30,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -47,10 +49,18 @@ public class BibliotecaController implements Initializable {
     private FileChooser fc= new FileChooser();
     
     @FXML
-    private VBox vbalbumes;
-    @FXML
     private Button btalbum;
     private LinkedList <Album> albumes;
+    @FXML
+    private ScrollPane panelalbumes;
+    @FXML
+    private HBox hbalbumes;
+    
+    
+    public final String rutaAbsolutaAlbunmes = "C:.\\Albumes\\";
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearLinkedAlbum();
@@ -65,11 +75,11 @@ public class BibliotecaController implements Initializable {
         App.scene.setRoot(root);
         
     }
-     @FXML
-    //aquí crearemos el linkedList<Album> tomándolo del archivo donde se guarda cada parteta creada
+    
+    
     //falta método para incorporar las fotos en caso de que existan
        private void crearLinkedAlbum(){
-        //LinkedList <Album> album = new LinkedList<>();
+        LinkedList <Album> album = new LinkedList<>();
         try {
             Scanner input = new Scanner(new File(rutaAbsolutaAlbunmes));
             while (input.hasNextLine()) {
@@ -87,8 +97,10 @@ public class BibliotecaController implements Initializable {
         }
         //return album;
     }
-    @FXML
-    //al borrar un album debemos removeer del linker, borrar carpeta y borrar registro del archivo
+       
+       
+       
+       
     private Album elimininarAlbum (int i){
     //eliminamos del tda
     Album album = albumes.remove(i);
@@ -104,6 +116,9 @@ public class BibliotecaController implements Initializable {
     }
     //código tomado de http://pacholalala.blogspot.com/2009/09/eliminar-una-linea-de-un-archivo-de.html 
     //para borrar una linea de un archivo créditos a su autor
+    
+    
+    
     public void removeLineFromFile(String file, String lineToRemove) {
 
         try {
@@ -151,6 +166,38 @@ public class BibliotecaController implements Initializable {
             System.out.println("Algun problema existió");
         }
   
+    }
+    
+    
+    
+    
+    public void cargarAlbumes(java.util.ArrayList<Album> albumes){
+        for(Album album : albumes){
+            
+            // EJEMPLO Image img = new Image("img/"+p.getNomfile());
+            Image imgPortada = new Image("RUTA_ARCHIVO_ALBUMES/"+ album.getPortada());
+            ImageView imgview = new ImageView(imgPortada);
+            imgview.setOnMouseClicked(
+                    (MouseEvent e)->
+                    {
+                try {
+                    FXMLLoader loader = App.loadFXML("vistaFotosGeneral");
+                    Parent root= loader.load();
+                    App.scene.setRoot(root);
+                    
+//                        hbalbumes.getChildren().clear();
+//                        Text titulo = new Text(p.getTitulo());
+//                        Text sinopsis = new Text(p.getSinopsis());
+//                        sinopsis.setWrappingWidth(200);
+//                        hbalbumes.getChildren().add(titulo);
+//                        hbalbumes.getChildren().add(sinopsis);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                    }
+            );
+            hbalbumes.getChildren().add(imgview);
+        }
     }
     
 }
