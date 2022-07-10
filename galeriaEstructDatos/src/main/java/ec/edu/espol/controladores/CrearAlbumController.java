@@ -10,8 +10,14 @@ import Interfaces.Rutas;
 import Interfaces.cargarFotos;
 import ec.edu.espol.model.AlbumPublico;
 import ec.edu.espol.model.Fotografia;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -43,15 +49,15 @@ public class CrearAlbumController extends Rutas implements Initializable {
     private Button btguardar;
     @FXML
     private ImageView ivportada;
-    
-    
+    @FXML
+    //private Button btnSeleccionarImagen;    
     // atributos Agregados manualmente
     private Path rutaPortada;
     
-    public final String rutaAbsolutaAlbunmes = "C:\\Users\\USER\\Documents\\NetBeansProjects\\galeriaEstructuras\\galeriaEstructDatos\\Albumes\\";
-    
+    //public final String rutaAbsolutaAlbunmes = "file:./Albumes/";
+    public final String rutaAbsolutaAlbunmes = "C:.\\Albumes\\";    
     public FileChooser fc= new FileChooser();
-
+    //public File file; //= new File(rutaAbsolutaAlbunmes  + "Albumes.txt");
     /**
      * Initializes the controller class.
      */
@@ -67,18 +73,19 @@ public class CrearAlbumController extends Rutas implements Initializable {
         
         String etNombre = etnombre.getText();
         String etDescripcion = etdescripcion.getText();
-        Image ivPortada = ivportada.getImage();
+        //Image ivPortada = ivportada.getImage();
         
-        if(!etNombre.isEmpty() && !etDescripcion.isEmpty() && ivPortada != null){            
-            Album nuevoAlbum = new AlbumPublico(etNombre, etDescripcion, ivPortada);             
+        if(!etNombre.isEmpty() && !etDescripcion.isEmpty() /*&& /*ivPortada != null*/){            
+            Album nuevoAlbum = new AlbumPublico(etNombre, etDescripcion/*, ivPortada*/);             
             File creaAlbum = new File(rutaAbsolutaAlbunmes + nuevoAlbum.getNombre());
 
             if(creaAlbum.exists())               
                 System.out.println("El nombre está ocupado");
             
             else{  
+                guardarRegistro(etNombre, etDescripcion);
                 creaAlbum.mkdir();
-                cargarFotos.agregarPortadaAlbum(creaAlbum, rutaPortada);       
+                //cargarFotos.agregarPortadaAlbum(creaAlbum, rutaPortada);       
             }
         }
     }
@@ -97,6 +104,26 @@ public class CrearAlbumController extends Rutas implements Initializable {
             System.out.println("RUTA DE LA FOTO ORIGINAL");
             System.out.println(rutaPortada);
             ivportada.setImage(img);
+        }
+    }
+    //aquí guardaremos los datos que cargaremos en el linkedlist albunes
+    private void guardarRegistro(String nombre, String descripcion) {
+        try {
+            
+           File file= new File(rutaAbsolutaAlbunmes  + "Albumes.txt");
+           //String path =rutaAbsolutaAlbunmes  + "Albumes.txt";
+            // Si el archivo no existe es creado
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            FileWriter fw = new FileWriter(file.getAbsoluteFile(), true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            //bw.newLine();
+            bw.write(nombre+","+descripcion);
+            bw.newLine();
+            bw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     

@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controladores.VistaFotosGeneralController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ec.edu.espol.controladores.VistaFotosGeneralController">
    <left>
       <ScrollPane fx:id="spfotopequena" prefHeight="200.0" prefWidth="200.0" visible="false" BorderPane.alignment="CENTER">
         <content>
@@ -29,11 +29,11 @@
    <top>
       <HBox prefHeight="100.0" prefWidth="200.0" spacing="60.0" BorderPane.alignment="CENTER">
          <children>
-            <Button mnemonicParsing="false" text="Regresar" />
-            <Button mnemonicParsing="false" text="Eliminar" />
-            <Button mnemonicParsing="false" text="Guardar" />
-            <Button mnemonicParsing="false" text="Anterior" />
-            <Button mnemonicParsing="false" text="Siguiente" />
+            <Button fx:id="btRegresar" mnemonicParsing="false" text="Regresar" />
+            <Button fx:id="btEliminar" mnemonicParsing="false" text="Eliminar" />
+            <Button fx:id="btCargar" mnemonicParsing="false" text="Cargar" />
+            <Button fx:id="btAnterior" mnemonicParsing="false" text="Anterior" />
+            <Button fx:id="btSiguiente" mnemonicParsing="false" text="Siguiente" />
          </children>
       </HBox>
    </top>

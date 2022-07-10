@@ -16,8 +16,8 @@ import javafx.scene.image.ImageView;
 public class AlbumPrivado extends Album{
     private String clave;
 
-    public AlbumPrivado(String nombre, String descripcion, Image portada, String clave) {
-        super(nombre, descripcion, portada);
+    public AlbumPrivado(String nombre, String descripcion/* Image portada*/, String clave) {
+        super(nombre, descripcion/*, portada*/);
         this.clave = clave;
     }
     
