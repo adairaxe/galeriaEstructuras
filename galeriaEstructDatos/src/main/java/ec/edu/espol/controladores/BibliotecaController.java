@@ -50,7 +50,7 @@ public class BibliotecaController implements Initializable {
     private VBox vbalbumes;
     @FXML
     private Button btalbum;
-
+    private LinkedList <Album> albumes;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         crearLinkedAlbum();
@@ -68,8 +68,8 @@ public class BibliotecaController implements Initializable {
      @FXML
     //aquí crearemos el linkedList<Album> tomándolo del archivo donde se guarda cada parteta creada
     //falta método para incorporar las fotos en caso de que existan
-       private LinkedList<Album> crearLinkedAlbum(){
-        LinkedList <Album> album = new LinkedList<>();
+       private void crearLinkedAlbum(){
+        //LinkedList <Album> album = new LinkedList<>();
         try {
             Scanner input = new Scanner(new File(rutaAbsolutaAlbunmes));
             while (input.hasNextLine()) {
@@ -85,7 +85,7 @@ public class BibliotecaController implements Initializable {
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-        return album;
+        //return album;
     }
     @FXML
     //al borrar un album debemos removeer del linker, borrar carpeta y borrar registro del archivo
