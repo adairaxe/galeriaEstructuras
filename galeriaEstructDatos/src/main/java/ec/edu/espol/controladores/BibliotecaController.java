@@ -57,8 +57,28 @@ public class BibliotecaController implements Initializable {
         App.scene.setRoot(root);
         
     }
-    
-    
+     @FXML
+    //aquí crearemos el linkedList<Album> tomándolo del archivo donde se guarda cada parteta creada
+    //falta método para incorporar las fotos en caso de que existan
+       private LinkedList<Album> crearLinkedAlbum(){
+        LinkedList <Album> album = new LinkedList<>();
+        try {
+            Scanner input = new Scanner(new File(rutaAbsolutaAlbunmes));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                ArrayList<String> parametros= new ArrayList<>();
+                if (line!="\n"){
+                String[] linea = line.split(",");
+                Album nuevoAlbum = new AlbumPublico(linea[0],linea[1]);
+                album.addLast(nuevoAlbum);
+                }
+            }
+            input.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        return album;
+    }
     
     
 }
