@@ -5,6 +5,7 @@
  */
 package ec.edu.espol.model;
 
+import Interfaces.Album;
 import TDAs.ArrayList;
 import TDAs.LinkedList;
 
@@ -17,5 +18,8 @@ public abstract class GenerarListas<E> {
     public abstract ArrayList<E> generarArrayList(String nombreArchivo);
     
     public abstract LinkedList<E> generarLinkedList(String nombreArchivo);
+    
+    
+
     
 }

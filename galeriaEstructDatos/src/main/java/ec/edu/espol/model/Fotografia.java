@@ -5,13 +5,22 @@
  */
 package ec.edu.espol.model;
 
+import TDAs.LinkedList;
 import javafx.scene.image.Image;
 
 public class Fotografia {
     
     private String descripcion, lugar, nombre;
     private Image foto;
-    
+    private LinkedList <String> personas;
+
+    public LinkedList<String> getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(LinkedList<String> personas) {
+        this.personas = personas;
+    }
 
     public Fotografia(Image foto) {
      
@@ -53,17 +62,5 @@ public class Fotografia {
     public String toString() {
         return "Fotografia{" + "descripcion=" + descripcion + ", lugar=" + lugar + ", nombre=" + nombre + ", foto=" + foto + ", icono=" + '}';
     }
-    
-    
-    
-
-
-    
-    
-    
-    
-    
-    
-    
-    
+     
 }

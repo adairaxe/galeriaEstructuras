@@ -16,6 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+
+import javafx.scene.layout.HBox;
+
 import javafx.stage.FileChooser;
 import javafx.stage.Window;
 
@@ -25,6 +28,7 @@ import javafx.stage.Window;
  * @author USER
  */
 
+
 public class VistaFotosGeneralController implements Initializable {
     private LinkedList<Fotografia> fotosAlbum;
     @FXML
@@ -33,9 +37,16 @@ public class VistaFotosGeneralController implements Initializable {
     private ImageView ivfotoGrande;
     @FXML
     private Button btCargar;
+    
+    @FXML
+    private ScrollPane panealbum;
+    @FXML
+    private HBox hbalbumes;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+        //Aquí buscaremos las imágenes para añadir al album
+
         btCargar.setOnAction(event -> {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Buscar Imagen");
@@ -49,6 +60,7 @@ public class VistaFotosGeneralController implements Initializable {
             
         // Obtener la imagen seleccionada
         File imgFile = fileChooser.showOpenDialog(null);
+
         
         // Mostar la imagen
         if (imgFile != null) {
@@ -73,4 +85,10 @@ public class VistaFotosGeneralController implements Initializable {
         formato = format[ultimo];
     return formato;
     }
+
+
+ 
+    
+    
+
 }

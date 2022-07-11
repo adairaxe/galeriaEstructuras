@@ -17,13 +17,15 @@ import javafx.scene.image.ImageView;
 public abstract class Album {
     String nombre;
     String descripcion;
-    //Image portada;
+    Image portada;
     LinkedList<Fotografia> fotos;
 
-    public Album(String nombre, String descripcion/*, /*Image portada*/) {
+
+    
+    public Album(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
-        //this.portada = portada;
+        this.portada = new Image(getClass().getResourceAsStream("Portada/Portada.png"));
     }
 
     public String getNombre() {
@@ -42,13 +44,13 @@ public abstract class Album {
         this.descripcion = descripcion;
     }
 
-    /*public Image getPortada() {
+    public Image getPortada() {
         return portada;
     }
 
     public void setPortada(Image portada) {
         this.portada = portada;
-    }*/
+    }
 
     public LinkedList<Fotografia> getFotos() {
         return fotos;

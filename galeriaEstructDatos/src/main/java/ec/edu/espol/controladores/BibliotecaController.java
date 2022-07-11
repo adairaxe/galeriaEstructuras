@@ -30,10 +30,12 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -51,13 +53,25 @@ public class BibliotecaController implements Initializable {
     private VBox vbalbumes;
     @FXML
     private Button btalbum;
+
     
     private LinkedList <Album> albumes;
+   
+
+    @FXML
+    private ScrollPane panelalbumes;
+    @FXML
+    private HBox hbalbumes;
+    
+    
+    
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
-        //LinkedList<Album> albumes = new LinkedList<>();
         crearLinkedAlbum();
+        //LinkedList<Album> albumes = new LinkedList<>();
+
     }    
 
     @FXML
@@ -77,10 +91,10 @@ public class BibliotecaController implements Initializable {
             while (input.hasNextLine()) {
                 String line = input.nextLine();
                 //ArrayList<String> parametros= new ArrayList<>();
-                if (!"\n".equals(line)){
-                String[] linea = line.split(",");
-                Album nuevoAlbum = new AlbumPublico(linea[0],linea[1]);
-                albumes.addLast(nuevoAlbum);
+                if (!line.equals("\n")){
+                    String[] linea = line.split(",");
+                    Album nuevoAlbum = new Album(linea[0],linea[1]) {};
+                    albumes.addLast(nuevoAlbum);
                 }
             }
             input.close();
@@ -91,32 +105,32 @@ public class BibliotecaController implements Initializable {
     
     @FXML
     //al borrar un album debemos removeer del linker, borrar carpeta y borrar registro del archivo
+
     private Album elimininarAlbum (int i){
     //eliminamos del tda
     Album album = albumes.remove(i);
     //eliminamos la carpeta
-    File f = new File(rutaAbsolutaAlbunmes + album.getNombre());	
-    if (f.delete())
-        System.out.println("Se eliminó la carpeta " + album.getNombre() );
-    else
-        System.out.println("Hubo un problema contacte al desarrollador");
+        File f = new File(rutaAbsolutaAlbunmes + album.getNombre());	
+        if (f.delete())
+            System.out.println("Se eliminó la carpeta " + album.getNombre() );
+        else
+            System.out.println("Hubo un problema contacte al desarrollador");
     
-    removeLineFromFile (rutaAbsolutaAlbunmes  + "Albumes.txt",album.getNombre()+","+album.getDescripcion());
-    return album;
+        removeLineFromFile (rutaAbsolutaAlbunmes  + "Albumes.txt",album.getNombre()+","+album.getDescripcion());
+        return album;
     }
     //código tomado de http://pacholalala.blogspot.com/2009/09/eliminar-una-linea-de-un-archivo-de.html 
     //para borrar una linea de un archivo créditos a su autor
+
     public void removeLineFromFile(String file, String lineToRemove) {
 
         try {
 
         File inFile = new File(file);
-   
         if (!inFile.isFile()) {
             System.out.println("El parámetro no existe en el archivo");
         return;
         }
-   
          //Construct the new file that will later be renamed to the original filename. 
         File tempFile = new File(inFile.getAbsolutePath() + ".tmp");
         BufferedReader br = new BufferedReader(new FileReader(file));
@@ -153,5 +167,42 @@ public class BibliotecaController implements Initializable {
             System.out.println("Algun problema existió");
         }
   
+    }    
+    
+       
+    public void cargarAlbumes(java.util.ArrayList<Album> albumes){
+        /*Album hola = new AlbumPublico("hola", "holaaa");
+        Image portada = new Image(getClass().getResourceAsStream("Portada/Portada.png"));
+        hola.setPortada(portada);
+        ImageView imgviewPrueba = new ImageView(hola.getPortada());*/
+        for(Album album : albumes){
+            
+            // EJEMPLO Image img = new Image("img/"+p.getNomfile());
+            //Image imgPortada = new Image("RUTA_ARCHIVO_ALBUMES/"+ album.getPortada());
+            ImageView imgview = new ImageView(album.getPortada());
+            imgview.setOnMouseClicked(
+                    (MouseEvent e)->
+                    {
+                try {
+                    FXMLLoader loader = App.loadFXML("vistaFotosGeneral");
+                    Parent root= loader.load();
+                    App.scene.setRoot(root);
+                    
+//                        hbalbumes.getChildren().clear();
+//                        Text titulo = new Text(p.getTitulo());
+//                        Text sinopsis = new Text(p.getSinopsis());
+//                        sinopsis.setWrappingWidth(200);
+//                        hbalbumes.getChildren().add(titulo);
+//                        hbalbumes.getChildren().add(sinopsis);
+                } catch (IOException ex) {
+                    ex.printStackTrace();
+                }
+                    }
+            );
+            hbalbumes.getChildren().add(imgview);
+        }
+        //hbalbumes.getChildren().add(imgviewPrueba);
     }
+    
+
 }
